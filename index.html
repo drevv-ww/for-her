@@ -12,7 +12,6 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      text-align: center;
       overflow: hidden;
     }
 
@@ -20,12 +19,19 @@
       background: white;
       padding: 40px;
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      text-align: center;
       max-width: 400px;
+      position: relative;
     }
 
     h1 {
       color: #d63384;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    p {
+      color: #6a0dad;
     }
 
     button {
@@ -37,48 +43,82 @@
       color: white;
       font-size: 16px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
     button:hover {
       background: #ff1493;
+      transform: scale(1.05);
     }
 
     .compliment {
       margin-top: 20px;
       font-size: 18px;
       color: #6a0dad;
+      min-height: 24px;
+      transition: 0.3s;
     }
 
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .heart {
+      position: absolute;
+      color: pink;
+      animation: float 6s linear infinite;
+      font-size: 20px;
+    }
+
+    @keyframes float {
+      from {transform: translateY(100vh);}
+      to {transform: translateY(-10vh);}
+    }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>Hey Bunny 🐰🌸</h1>
-    <p>You are stronger, brighter, and more beautiful than you realize 💖</p>
-    <button onclick="showCompliment()">Click for a surprise 💌</button>
-    <div class="compliment" id="compliment"></div>
-  </div>
+<div class="card">
+  <h1>Hey Priya 🌸</h1>
+  <p>You are stronger and more beautiful than you think 💖</p>
+  <button onclick="showCompliment()">Click for a surprise 💌</button>
+  <div class="compliment" id="compliment"></div>
+</div>
 
-  <script>
-    const compliments = [
-      "Your smile can fix bad days 😊",
-      "You deserve the happiest life 🌸",
-      "You are incredibly strong 💪",
-      "The world is lucky to have you 💖",
-      "You make everything better ✨",
-      "You are deeply appreciated 💕",
-      "You inspire more than you know 🌷",
-      "You are beautiful inside and out 💫",
-      "You matter. Always. 💗",
-      "You are someone's favorite person 💌"
-    ];
+<script>
+  const compliments = [
+    "Your smile fixes bad days 😊",
+    "You deserve the happiest life 🌸",
+    "You are incredibly strong 💪",
+    "You make everything better ✨",
+    "You are deeply appreciated 💕",
+    "You inspire more than you know 🌷",
+    "You are beautiful inside and out 💫",
+    "You matter. Always. 💗",
+    "You are someone's favorite person 💌",
+    "The world is lucky to have you 💖"
+  ];
 
-    function showCompliment() {
-      const random = compliments[Math.floor(Math.random() * compliments.length)];
-      document.getElementById("compliment").innerText = random;
-    }
-  </script>
+  function showCompliment() {
+    const random = compliments[Math.floor(Math.random() * compliments.length)];
+    document.getElementById("compliment").innerText = random;
+  }
+
+  // Floating hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.classList.add("heart");
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }, 500);
+</script>
 
 </body>
 </html>
